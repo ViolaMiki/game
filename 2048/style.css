@@ -1,0 +1,23 @@
+.area{
+    width: 484px;
+    height: 484px;
+    background-color: #C2B8A9;
+    padding: 16px 0 0 16px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius:15px;
+}
+.square {
+    background-color: #CBC0B2;
+    width: 105px;
+    height: 105px;
+    margin: 0 16px 16px 0;
+    float: left;
+    font-size: 77px;
+    line-height: 105px;
+    text-align: center;
+}
+.num_2 {
+    background-color: #DAD0C4;
+    color: #A89092;
+}
