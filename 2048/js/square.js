@@ -3,22 +3,22 @@ var square = function (index, value) {
     this.value = value;
 };
 
-square.getUp = function() {
-    var index = this.index - 3;
+square.prototype.down = function() {
+    var index = this.index - 4;
     return index < 0 ? null : index;
 }
 
-square.getDown = function() {
-    var index = this.index + 3;
+square.prototype.up = function() {
+    var index = this.index + 4;
     return index > 15 ? null : index;
 }
 
-square.getLeft = function() {
+square.prototype.right = function() {
     var index = this.index - 1;
     return index < 0 ? null : index;
 }
 
-square.getRight = function() {
+square.prototype.left = function() {
     var index = this.index + 1;
     return index > 15 ? null : index;
 }
