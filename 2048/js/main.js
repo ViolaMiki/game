@@ -14,6 +14,5 @@ document.onkeydown = function (ev) {
     if (!!handle) {
         area.move(handle);
         console.log(area);
-        area.show();
     }
 }; 

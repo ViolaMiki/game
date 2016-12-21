@@ -9,11 +9,6 @@ var area = {
     },
     back: { bottom: 'top', top: 'bottom', left: 'right', right: 'left' },
     font_size: [55, 45],
-    moveList_0: [],
-    moveList_1: [],
-    moveList_2: [],
-    moveList_3: [],
-    direction: '',
 };
 
 area.getAll = function () {
@@ -30,7 +25,9 @@ area.getEmpty = function () {
     var emptySquare = [];
     this.container.forEach(function (square, index) {
         if (!square.value) {
-            emptySquare.push(square.index);
+            if (emptySquare.push(square.index)) {
+                console.log(1);
+            }
         }
     })
     return emptySquare;
@@ -51,45 +48,6 @@ area.draw = function () {
     }, this)
 }
 
-area.show = function () {
-    var index = 0;
-    var timer = setInterval(function () {
-        if (area.moveList_0.hasOwnProperty(index)) {
-            area.moveStyle(area.moveList_0[index][0], area.direction);
-            area.changeStyle(area.moveList_0[index][0], area.moveList_0[index][1],
-                area.moveList_0[index][2], area.moveList_0[index][3]);
-        }
-
-        if (area.moveList_1.hasOwnProperty(index)) {
-            area.moveStyle(area.moveList_1[index][0], area.direction);
-            area.changeStyle(area.moveList_1[index][0], area.moveList_1[index][1],
-                area.moveList_1[index][2], area.moveList_1[index][3]);
-        }
-
-        if (area.moveList_2.hasOwnProperty(index)) {
-            area.moveStyle(area.moveList_2[index][0], area.direction);
-            area.changeStyle(area.moveList_2[index][0], area.moveList_2[index][1],
-                area.moveList_2[index][2], area.moveList_2[index][3]);
-        }
-
-        if (area.moveList_3.hasOwnProperty(index)) {
-            area.moveStyle(area.moveList_3[index][0], area.direction);
-            area.changeStyle(area.moveList_3[index][0], area.moveList_3[index][1],
-                area.moveList_3[index][2], area.moveList_3[index][3]);
-        }
-        ++index;
-
-        if (index >= 4) {
-            clearInterval(timer);
-            area.moveList_0 = [];
-            area.moveList_1 = [];
-            area.moveList_2 = [];
-            area.moveList_3 = [];
-            area.newSquare();
-        }
-    }, 500)
-}
-
 area.newSquare = function () {
     empty = this.getEmpty();
     index = Math.floor(Math.random() * empty.length);
@@ -100,45 +58,48 @@ area.newSquare = function () {
 }
 
 area.move = function (direction) {
-    this.direction = direction;
     this.startIndex[direction].forEach(function (index) {
-        var change = true;
-        while (change) {
-            change = this.updateValue(index, direction);
-        }
+        this.updateValue(index, direction);
         this.updateValue(index, direction)
     }, this);
 }
 
 area.updateValue = function (index, direction) {
     var change = false;
-    var list_num = this.startIndex[direction].indexOf(index);
-    do {
-        var nextIndex = this.container[index][direction]();
-        var nextValue = this.container[nextIndex].value;
-        var value = this.container[index].value;
-        switch (value) {
-            case 0:
-                if (nextValue) {
-                    this.container[index].value = nextValue;
-                    this.container[nextIndex].value = 0;
-                    this['moveList_' + list_num].push([this.squares[nextIndex].firstElementChild, value,
-                    this.squares[index].firstElementChild, nextValue]);
+    var default_index = index;
+    var timer = setInterval(function () {
+        if (area.startIndex[area.back[direction]].indexOf(index) === -1) {
+            var nextIndex = area.container[index][direction]();
+            var nextValue = area.container[nextIndex].value;
+            var value = area.container[index].value;
+            switch (value) {
+                case 0:
+                    if (nextValue) {
+                        area.container[index].value = nextValue;
+                        area.container[nextIndex].value = 0;
+                        area.moveStyle(area.squares[nextIndex].firstElementChild, direction);
+                        area.changeStyle(area.squares[nextIndex].firstElementChild, area.container[nextIndex].value,
+                            area.squares[index].firstElementChild, area.container[index].value);
+                        change = true;
+                    }
+                    break;
+                case nextValue:
+                    area.container[index].value += nextValue;
+                    area.container[nextIndex].value = 0;
+                    area.moveStyle(area.squares[nextIndex].firstElementChild, direction);
+                    area.changeStyle(area.squares[nextIndex].firstElementChild, area.container[nextIndex].value,
+                        area.squares[index].firstElementChild, area.container[index].value);
                     change = true;
-                }
-                break;
-            case nextValue:
-                this.container[index].value += nextValue;
-                this.container[nextIndex].value = 0;
-                this['moveList_' + list_num].push([this.squares[nextIndex].firstElementChild, 0,
-                this.squares[index].firstElementChild, this.container[index].value]);
-                change = true;
-                break;
+                    break;
+            }
+            index = nextIndex;
+        } else if (change) {
+            index = default_index;
+        } else {
+            clearInterval(timer);
+            return true;
         }
-        index = nextIndex;
-    } while (this.startIndex[this.back[direction]].indexOf(index) === -1)
-
-    return change;
+    }, 500);
 }
 
 area.addStyle = function (node, num) {
