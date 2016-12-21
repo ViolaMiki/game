@@ -18,51 +18,46 @@
     text-align: center;
 }
 .num_2 {
-    background-color: #DAD0C4;
-    color: #A89092;
+    background-color: #EEE4DA;
+    color: #7C736A;
 }
 .num_4 {
-    background-color: #DAD0C4;
-    color: #A89092;
+    background-color: #ECE0C8;
+    color: #7C736A;
 }
 .num_8 {
-    background-color: #DAD0C4;
-    color: #A89092;
+    background-color: #F2B179;
+    color: #FFF7EB;
 }
 .num_16 {
-    background-color: #DAD0C4;
-    color: #A89092;
+    background-color: #F59563;
+    color: #FFF7EB;
 }
 .num_32 {
-    background-color: #DAD0C4;
-    color: #A89092;
+    background-color: #F57C5F;
+    color: #FFF7EB;
 }
 .num_64 {
-    background-color: #DAD0C4;
-    color: #A89092;
+    background-color: #F65D3B;
+    color: #FFF7EB;
 }
 .num_128 {
-    font-size: 55px;
-    background-color: #DAD0C4;
-    color: #A89092;
+    background-color: #EDCE71;
+    color: #FFF7EB;
 }
 .num_256 {
-    font-size: 55px;
-    background-color: #DAD0C4;
-    color: #A89092;
+    background-color: #EDCC61;
+    color: #FFF7EB;
 }
 .num_512 {
-    font-size: 55px;
-    background-color: #DAD0C4;
-    color: #A89092;
+    background-color: #EDCC61;
+    color: #FFF7EB;
 }
 .num_1024 {
-    font-size: 45px;
-    background-color: #DAD0C4;
-    color: #A89092;
+    background-color: #EDCC61;
+    color: #FFF7EB;
 }
 .num_2048 {
-    font-size: 45px;
-    background-color: #DAD0C4;
-    color: #A89092;
+    background-color: #EDCC61;
+    color: #FFF7EB;
 }
