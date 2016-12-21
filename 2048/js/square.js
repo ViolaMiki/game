@@ -3,12 +3,12 @@ var square = function (index, value) {
     this.value = value;
 };
 
-square.prototype.down = function() {
+square.prototype.bottom = function() {
     var index = this.index - 4;
     return index < 0 ? null : index;
 }
 
-square.prototype.up = function() {
+square.prototype.top = function() {
     var index = this.index + 4;
     return index > 15 ? null : index;
 }
